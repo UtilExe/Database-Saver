@@ -9,4 +9,4 @@
 
 ### Future ToDo:
 - Implement in GUI-mode.
-- Implement verification of login authentication using PHP with REST, to authenticate Xenforo login. Or attempt with Java using BCRypt.
+- Implement verification of login authentication using PHP with REST, to authenticate Xenforo login. Or attempt with Java using BCrypt.
