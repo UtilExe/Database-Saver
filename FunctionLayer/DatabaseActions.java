@@ -23,6 +23,15 @@ public class DatabaseActions {
     private String savePath;
     private String executeCmd;
     private String folderPath;
+    private String mySQLFolderPath;
+
+    public String getMySQLFolderPath() {
+        return mySQLFolderPath;
+    }
+
+    public void setMySQLFolderPath(String mySQLFolderPath) {
+        this.mySQLFolderPath = mySQLFolderPath;
+    }
 
     public String getFolderPath() {
         return folderPath;
@@ -73,7 +82,7 @@ public class DatabaseActions {
     }
 
     // ToDo: Validation and error-handling + better default messages.
-    public void Backupdbtosql() throws URISyntaxException {
+    public void exportDatabase() throws URISyntaxException {
         try {
 
             /* Not using below */
@@ -90,22 +99,32 @@ public class DatabaseActions {
             setDbUser(scanner.nextLine());
             System.out.println("Enter database password: (Default: ascent)");
             setDbPass(scanner.nextLine());
+            System.out.println("Enter the _Server folder location. Example: C:\\Users\\Emil\\Desktop\\Emulation\\_Server - EmuCoach Version v14_Blizz_VIP\\_Server\\mysql\\bin\\");
+            setMySQLFolderPath(scanner.nextLine() + "\\");
 
             /*NOTE: Creating Path Constraints for folder saving*/
             /*NOTE: Here the backup folder is created for saving inside it*/
             System.out.println("Enter the folder path to where to save the sql files. Dev: \\C:\\Users\\Emil\\Desktop\\Emulation\\backup_dev\\");
-            setFolderPath(scanner.nextLine());
-
+            
+            /* Backup Folder Validation */
+            // Need to add a backslash at the end of the string for the file to insert properly.
+            setFolderPath(scanner.nextLine() + "\\");
+            // It needs a double backslash to insert the file properly.
+            setFolderPath(getFolderPath().replace("\\", "\\\\"));
+            
+            /* MSQL Folder Validation */
+            // Need to add a backslash at the end of the string for the file to insert properly.
+            // It needs a double backslash to insert the file properly.
+            setMySQLFolderPath(getMySQLFolderPath().replace("\\", "\\\\"));
+            
             /*NOTE: Creating Folder if it does not exist*/
             File f1 = new File(getFolderPath());
             f1.mkdir();
 
             /*NOTE: Creating Path Constraints for backup saving*/
             /*NOTE: Here the backup is saved in a folder called backup with the name backup.sql*/
-            setSavePath("C:\\Users\\Emil\\Desktop\\Emulation\\backup_dev\\" + getDbName() + "_export.sql\"");
-            /*NOTE: Used to create a cmd command*/
-            setExecuteCmd("C:\\Users\\Emil\\Desktop\\Emulation\\_Server - EmuCoach Version v14_Blizz_VIP\\_Server\\mysql\\bin\\mysqldump -u" + getDbUser() + " -p" + getDbPass() + " --database " + getDbName() + " -r " + getSavePath());
-
+            setSavePath(getFolderPath() + getDbName() + "_export.sql");
+            setExecuteCmd(getMySQLFolderPath()+"mysqldump -u" + getDbUser() + " -p" + getDbPass() + " --database " + getDbName() + " -r " + getSavePath());
             /*NOTE: Executing the command here*/
             Process runtimeProcess = Runtime.getRuntime().exec(getExecuteCmd());
             int processComplete = runtimeProcess.waitFor();

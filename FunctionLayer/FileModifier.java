@@ -7,20 +7,26 @@ import org.apache.commons.io.FileUtils;
 /* For Future we can use this class to add new SQL fixes, and implement it to the World DB, so people can update it quickly */
 public class FileModifier {
 
-    private String DBNameToUpdate;
-    private String NewDBName;
+    private String authDBNameToUpdate;
+    private String authNewDBName;
+    private String charDBNameToUpdate;
+    private String charNewDBName;
+    private DatabaseActions DBActions = new DatabaseActions();
 
     public FileModifier() {
-        this.DBNameToUpdate = "emucoach_v14_vip_auth";
-        this.NewDBName = "emucoach_v15_vip_auth";
+        this.authDBNameToUpdate = "emucoach_v14_vip_auth";
+        this.authNewDBName = "emucoach_v15_vip_auth";
+        
+        this.charDBNameToUpdate = "emucoach_v14_vip_char";
+        this.charNewDBName = "emucoach_v15_vip_char";
     }
     
-    public void updateContent() throws IOException {
+    public void updateContentOfAuthOrChar() throws IOException {
         try {
-        File file = new File("C:\\Users\\Emil\\Desktop\\Emulation\\backup_dev\\emucoach_v14_vip_auth_export.sql");
+        File file = new File(DBActions.getFolderPath() + DBActions.getDbName() + "_export.sql\"");
         String fileContext = FileUtils.readFileToString(file);
-        fileContext = fileContext.replaceAll(DBNameToUpdate, NewDBName);
-                                 // For multiple text:.. .replaceAll("test", "test1");
+        fileContext = fileContext.replaceAll(authDBNameToUpdate, authNewDBName)
+                                 .replaceAll(charDBNameToUpdate, charNewDBName);
         FileUtils.write(file, fileContext);
         System.out.println("Completed!");
         } catch (IOException e) {

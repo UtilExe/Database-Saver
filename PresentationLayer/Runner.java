@@ -12,8 +12,8 @@ public class Runner {
     private static DatabaseActions DbRunner = new DatabaseActions();
     private static FileModifier FileEditor = new FileModifier();
     public static void main(String[] args) throws URISyntaxException, IOException {
-        //DbRunner.Backupdbtosql();
+        DbRunner.exportDatabase();
+        //FileEditor.updateContentOfAuthOrChar();
         //DbRunner.importDBExecutor();
-        FileEditor.updateContent();
     }
 }
