@@ -5,7 +5,6 @@
 - exportDatabase() Method is almost complete. Might need a bit more validation/error-handling.
 - importDBExecutor() method needs testing, to make sure it works well.
 - updateContentOfAuthOrChar() method needs v14 changed to v131, and perhaps some validation/error-handling/expanding.
-It also needs a Scanner implemented to specify the file that should get changed, unless we do it dynamicly. Atm the getters return null cause instantiating a new object and the variables are not static.
 - ToDo steps needs to be taken care of.
 
 ### ToDo:

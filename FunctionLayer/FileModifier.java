@@ -11,7 +11,6 @@ public class FileModifier {
     private String authNewDBName;
     private String charDBNameToUpdate;
     private String charNewDBName;
-    private DatabaseActions DBActions = new DatabaseActions();
 
     public FileModifier() {
         this.authDBNameToUpdate = "emucoach_v14_vip_auth";
@@ -21,9 +20,9 @@ public class FileModifier {
         this.charNewDBName = "emucoach_v15_vip_char";
     }
     
-    public void updateContentOfAuthOrChar() throws IOException {
+    public void updateContentOfAuthOrChar(String folderPath, String DbName) throws IOException {
         try {
-        File file = new File(DBActions.getFolderPath() + DBActions.getDbName() + "_export.sql\"");
+        File file = new File(folderPath + DbName + "_export.sql"+"\\");
         String fileContext = FileUtils.readFileToString(file);
         fileContext = fileContext.replaceAll(authDBNameToUpdate, authNewDBName)
                                  .replaceAll(charDBNameToUpdate, charNewDBName);

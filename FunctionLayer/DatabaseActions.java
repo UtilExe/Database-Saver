@@ -16,6 +16,7 @@ import org.apache.commons.io.FileUtils;
 public class DatabaseActions {
 
     private static Scanner scanner = new Scanner(System.in);
+    private FileModifier FileEditor = new FileModifier();
     // For Backuptosql Method
     private String dbName;
     private String dbUser;
@@ -131,6 +132,7 @@ public class DatabaseActions {
 
             /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
             if (processComplete == 0) {
+                FileEditor.updateContentOfAuthOrChar(getFolderPath(), getDbName());
                 System.out.println("Backup Complete");
             } else {
                 System.out.println("Backup Failure");
