@@ -112,7 +112,7 @@ public class DatabaseActions {
             // It needs a double backslash to insert the file properly.
             setFolderPath(getFolderPath().replace("\\", "\\\\"));
             
-            /* MSQL Folder Validation */
+            /* MySQL Folder Validation */
             // Need to add a backslash at the end of the string for the file to insert properly.
             // It needs a double backslash to insert the file properly.
             setMySQLFolderPath(getMySQLFolderPath().replace("\\", "\\\\"));

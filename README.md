@@ -1,10 +1,19 @@
 ## Database Saver
 #### A small application through CLI to export databases, import them, and modify file content. Coded in Java in a plain project.
 
+### Status:
+- exportDatabase() Method is almost complete. Might need a bit more validation/error-handling.
+- importDBExecutor() method needs testing, to make sure it works well.
+- updateContentOfAuthOrChar() method needs v14 changed to v131, and perhaps some validation/error-handling/expanding.
+It also needs a Scanner implemented to specify the file that should get changed, unless we do it dynamicly. Atm the getters return null cause instantiating a new object and the variables are not static.
+- ToDo steps needs to be taken care of.
+
 ### ToDo:
-- Documentation
+- Documentation (Explain how to use it).
 - Convert to a Maven project for better project/file structure
-- Implement the current functions.
+- Consider implementing Integration Testing
+- Change the default texts on Scanner, to make it more clear/easier.
+- Make the application more user-friendly. (Eg. implement an interface through the CLI).
 
 
 ### Future ToDo:
